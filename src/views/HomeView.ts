@@ -108,7 +108,7 @@ class HomeView extends AbstractView {
     // TODO: Get domains from config.
     const exposed_chips = ["light", "fan", "cover", "switch", "climate"];
     // Create a list of area-ids, used for switching all devices via chips
-    const areaIds = Helper.areas.map(area => area.area_id); //TODO: Pass areas to constructor.
+    const areaIds = Helper.areas.map(area => area.area_id ?? "");
 
     let chipModule;
 
@@ -134,8 +134,9 @@ class HomeView extends AbstractView {
         const className = Helper.sanitizeClassName(chipType + "Chip");
         try {
           chipModule = await import((`../chips/${className}`));
-          const chip = new chipModule[className]({}, areaIds);
+          const chip = new chipModule[className]();
 
+          chip.setTarget({area_id: areaIds});
           chips.push(chip.getChip());
         } catch (e) {
           console.error(Helper.debug ? e : `An error occurred while creating the ${chipType} chip!`);
