@@ -63,7 +63,7 @@ class ClimateView extends AbstractView {
     // Create a title card to switch all entities of the domain.
     this.viewTitleCard = new TitleCard(Helper.areas, {
       ...this.#viewTitleCardSettings,
-      ...this.settings,
+      ...("titleCardOptions" in this.settings ? this.settings.titleCardOptions : {}) as cards.titleCardOptions,
     }).createCard();
   }
 }
