@@ -113,6 +113,7 @@ export namespace cards {
 
   export interface lockCardOptions extends Partial<abstractOptions> {}
   export interface switchCardOptions extends Partial<abstractOptions> {}
+  export interface numberCardOptions extends Partial<abstractOptions> {}
 
   /**
    * Climate Card options.
